@@ -96,6 +96,10 @@ li{
 	float:left;
 }
 
+.graph{
+	width: 300px;
+}
+
 /*Left column of front page*/
 .left{
 	width:20%;
@@ -209,6 +213,10 @@ li{
 	.column{
 		float:center;
 		width:100%;
+	}
+	
+	.graph{
+		width:250px;
 	}
 	
 	.left{

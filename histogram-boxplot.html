@@ -11,8 +11,8 @@
 	<h3 style="border-bottom:1px solid gray;">Introduction: </h3>
 	<p>&emsp;In this assignment, we will be working on creating graphs and charts using the R computer language in order to graphically display information and data provided to me by the instructor. We will also be walking through how to construct this using code in the RGui, which is the official software application that runs R, therefore meaning R doubles as a software application and a programming language. We will be constructing a Strip Chart, a Histogram, and a Boxplot in this assignment. Of course, the first thing I have to do is change the directory to the folder where I stored the datasets I will be using in this assignment so that the computer knows where to even search for them at all. In my case, they are in a folder labeled <code>Exercise6</code>, which is stored in the <code>Documents</code> folder in my computer. All I have to do is open RGui, then click "File" and then "Change dir", go inside the <code>Documents</code> folder, and then open the <code>Exercise6</code> folder. We start with two datasets <code>w1.dat</code> and <code>trees91.csv</code>. The first thing we need to do is import them using the <code>read.csv</code> command to store them into two new variables we will define, <code>w1</code> and <code>tree</code>, respectively.</p>
 	<p class="code">
-	&#62; w1 &#60;- read.csv(file="w1.dat", header=TRUE, sep=",")<br>
-	&#62; tree &#60;- read.csv(file="trees91.csv",header=TRUE,sep=",")
+		&#62; w1 &#60;- read.csv(file="w1.dat", header=TRUE, sep=",")<br>
+		&#62; tree &#60;- read.csv(file="trees91.csv",header=TRUE,sep=",")
 	</p>
 	<h3 style="border-bottom:1px solid gray;">Strip Charts: </h3>
 	<img src="stripchart.png" class="graph" height="auto" hspace="5" align="right">

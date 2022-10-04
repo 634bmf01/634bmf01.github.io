@@ -80,6 +80,7 @@ li{
 	font-family:"CourierNew";
 	border-left: 2px solid gray;
 	padding-left: 10px;
+	word-wrap:break-word;
 }
 
 .contact{
@@ -97,7 +98,9 @@ li{
 }
 
 .graph{
-	width: 300px;
+	width: 100%;
+	max-width: 300px;
+	height: auto;
 }
 
 /*Left column of front page*/
@@ -213,10 +216,6 @@ li{
 	.column{
 		float:center;
 		width:100%;
-	}
-	
-	.graph{
-		width:40%;
 	}
 	
 	.left{

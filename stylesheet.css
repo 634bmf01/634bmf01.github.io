@@ -1,19 +1,19 @@
 /*Rundschrift font*/
 @font-face{
 	font-family:"Rundschrift";
-	src: url("Fonts/VAG_Rundschrift_BQ_Regular.otf");
+	src: url("VAG_Rundschrift_BQ_Regular.otf");
 }
 
 /*Lucida Grande font*/
 @font-face{
 	font-family:"LucidaGrande";
-	src: url("Fonts/LucidaGrande.ttf");
+	src: url("LucidaGrande.ttf");
 }
 
 /*Courier New font*/
 @font-face{
 	font-family:"CourierNew";
-	src: url("Fonts/cour.ttf");
+	src: url("cour.ttf");
 }
 
 *{
@@ -29,7 +29,7 @@ p, ul,li,figcaption{
 }
 
 body  {
-	background-image: url("Images/clouds.jpg");
+	background-image: url("clouds.jpg");
 	background-color:#2289CE;
 }
 
@@ -59,7 +59,7 @@ figure{
 }
 
 li{
-	list-style-image: url("Images/bulletpoint.png");
+	list-style-image: url("bulletpoint.png");
 }
 
 .animatemap{
@@ -73,7 +73,7 @@ li{
 }
 
 .bibliography li{
-	list-style-image: url("Images/bookbullet.png");
+	list-style-image: url("bookbullet.png");
 }
 
 .code{

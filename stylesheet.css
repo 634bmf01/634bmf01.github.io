@@ -80,7 +80,6 @@ li{
 	font-family:"CourierNew";
 	border-left: 2px solid gray;
 	padding-left: 10px;
-	word-break:break-all;
 }
 
 .contact{
@@ -216,6 +215,10 @@ li{
 	.column{
 		float:center;
 		width:100%;
+	}
+	
+	.code{
+		word-break:break-all;
 	}
 	
 	.left{

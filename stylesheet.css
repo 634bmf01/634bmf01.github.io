@@ -80,7 +80,7 @@ li{
 	font-family:"CourierNew";
 	border-left: 2px solid gray;
 	padding-left: 10px;
-	word-wrap:break-word;
+	word-break:break-all;
 }
 
 .contact{

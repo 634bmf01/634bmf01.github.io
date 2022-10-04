@@ -1,0 +1,223 @@
+/*Rundschrift font*/
+@font-face{
+	font-family:"Rundschrift";
+	src: url("Fonts/VAG_Rundschrift_BQ_Regular.otf");
+}
+
+/*Lucida Grande font*/
+@font-face{
+	font-family:"LucidaGrande";
+	src: url("Fonts/LucidaGrande.ttf");
+}
+
+/*Courier New font*/
+@font-face{
+	font-family:"CourierNew";
+	src: url("Fonts/cour.ttf");
+}
+
+*{
+	box-sizing:border-box;
+}
+
+h2,h3,h4,h5{
+	font-family:"LucidaGrande";
+}
+
+p, ul,li,figcaption{
+	font-family:"Arial";
+}
+
+body  {
+	background-image: url("Images/clouds.jpg");
+	background-color:#2289CE;
+}
+
+code{
+	font-family:"CourierNew";
+}
+
+div#content{
+	background:#F8F0E3;
+	box-shadow: 2px 2px 4px #000000;
+	padding:15px;
+	width:80%;
+	margin:auto;
+	border-radius:20px;
+	border:1px;
+	border-style:solid;
+}
+
+div#footer{
+	margin: 10px;
+	font-family:"LucidaGrande";
+}
+
+figure{
+	float:right;
+	padding: 5px;
+}
+
+li{
+	list-style-image: url("Images/bulletpoint.png");
+}
+
+.animatemap{
+	background-color:#F8F0E3;
+	box-shadow: 2px 2px 4px #000000;
+	border-radius:20px;
+	margin-left:25px;
+	margin-right:25px;
+	border:1px;
+	border-style:solid;
+}
+
+.bibliography li{
+	list-style-image: url("Images/bookbullet.png");
+}
+
+.code{
+	font-family:"CourierNew";
+	border-left: 2px solid gray;
+	padding-left: 10px;
+}
+
+.contact{
+	padding:10px;
+	border-radius:10px;
+	border:1px;
+	border-style:solid;
+	background:#F8F0E3;
+	box-shadow: 2px 2px 4px #000000;
+	
+}
+
+.column{
+	float:left;
+}
+
+/*Left column of front page*/
+.left{
+	width:20%;
+	margin-left:2.5%;
+	margin-right:1.25%;
+}
+
+.menu{
+	width:100%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border:1px solid black;
+	box-shadow: 2px 2px 4px #000000;
+	background: #F8F0E3;
+	border-radius: 5px;
+}
+
+.menu a{
+	display:block;
+	padding:10px;
+	color: black;
+	text-decoration:none;
+	font-family: "LucidaGrande";
+	font-weight:bold;
+	font-size: 14px;
+}
+
+.menu a, .dropdown-btn{
+	display:block;
+	border:none;
+	width:100%;
+	font-size: 14px;
+	font-weight:bold;
+	font-family:"LucidaGrande";
+	background: none;
+	text-align:left;
+	padding:10px;
+	cursor:pointer;
+}
+
+.dropdown-container{
+	display:none;
+	padding-left: 15px;
+}
+
+.dropdown-container a{
+	font-size:14px;
+	padding:5px;
+}
+
+.next{
+	background-image: linear-gradient(#B8E2A3, #42A341);
+	font-family:"Arial";
+	font-size:24px;
+	padding: 10px;
+	text-decoration:none;
+	display:inline-block;
+	border-radius:10px;
+	font-weight:bold;
+	color:black;
+	box-shadow: 2px 2px 4px #000000;
+	margin-left:30px;
+}
+
+.previous{
+	background-image: linear-gradient(#FC979F, #CC1714);
+	font-family:"Arial";
+	font-size:24px;
+	padding: 10px;
+	text-decoration:none;
+	display:inline-block;
+	border-radius:10px;
+	font-weight:bold;
+	color:black;
+	box-shadow: 2px 2px 4px #000000;
+}
+
+.responsive{
+	width:100%;
+	max-width:900px;
+	height: auto;
+	
+}
+
+.right{
+	width:75%;
+	background:#F8F0E3;
+	box-shadow: 2px 2px 4px #000000;
+	margin-right:1.25%;
+	padding:20px;
+	border-radius:10px;
+	border:1px;
+	border-style:solid;
+}
+
+.row:after{
+  content:"";
+  display:table;
+  clear:both;
+}
+
+.widgethead{
+	margin:-11px;
+	border-radius:10px 10px 0px 0px;
+	background-image: linear-gradient(#183F4E, #13323E);
+	padding:10px;
+	border: 1px solid black;
+}
+
+@media screen and (max-width:400px){
+	.column{
+		float:center;
+		width:100%;
+	}
+	
+	.left{
+		margin-left:auto;
+		margin-right:auto;
+		margin-bottom: 5px;
+	}
+	
+	figure{
+		float:center;
+	}
+}

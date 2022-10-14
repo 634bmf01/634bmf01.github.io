@@ -41,7 +41,8 @@ div#content{
 	background:#F8F0E3;
 	box-shadow: 2px 2px 4px #000000;
 	padding:15px;
-	width:80%;
+	width:100%;
+	max-width: 1000px;
 	margin:auto;
 	border-radius:20px;
 	border:1px;
@@ -80,6 +81,7 @@ li{
 	font-family:"CourierNew";
 	border-left: 2px solid gray;
 	padding-left: 10px;
+	word-break: break-all;
 }
 
 .contact{
@@ -111,8 +113,8 @@ li{
 
 .menu{
 	width:100%;
-	margin-top: 20px;
-	margin-bottom: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	border:1px solid black;
 	box-shadow: 2px 2px 4px #000000;
 	background: #F8F0E3;
@@ -167,6 +169,32 @@ li{
 }
 
 .previous{
+	background-image: linear-gradient(#FC979F, #CC1714);
+	font-family:"Arial";
+	font-size:24px;
+	padding: 10px;
+	text-decoration:none;
+	display:inline-block;
+	border-radius:10px;
+	font-weight:bold;
+	color:black;
+	box-shadow: 2px 2px 4px #000000;
+}
+
+.finish{
+	background-image: linear-gradient(#FC979F, #CC1714);
+	font-family:"Arial";
+	font-size:24px;
+	padding: 10px;
+	text-decoration:none;
+	display:inline-block;
+	border-radius:10px;
+	font-weight:bold;
+	color:black;
+	box-shadow: 2px 2px 4px #000000;
+}
+
+.return{
 	background-image: linear-gradient(#FC979F, #CC1714);
 	font-family:"Arial";
 	font-size:24px;

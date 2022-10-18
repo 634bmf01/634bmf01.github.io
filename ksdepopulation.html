@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="stylesheet.css">
+<title>Western Kansas Depopulation</title>
+<style>
+	table,td {
+		border: 1px solid #333;
+	}
+	thead, tfoot {
+		font-family:LucidaGrande;
+	}
+</style>
+</head>
+
+<body>
+<div id="content">
+	<h3 style="border-bottom:1px solid gray;">Introduction:</h3>
+	<p>&emsp;When you think of ghost towns, what kinds of places come to mind? Pripyat? Picher, Oklahoma? Gold mining towns in California? How about Kansas? Because Kansas has many ghost towns all over the state, with most of them being in the western half. If you looked at my webmap, you would notice how many towns west of Wichita and Salina are so small, except for Garden City and Dodge City. The western half of Kansas is not as populated as the eastern half of the state, and many ghost towns and near ghost towns are out there. In this project, I'm going to use some data that I was given to complete an assignment in one of my classes to map out the decline in population in counties in Western Kansas and observe trends. We want to answer questions like these:</p>
+	<ul class="questions">
+		<li>Which counties in Western Kansas have shrunken the fastest?</li>
+		<li>Have any counties in Western Kansas increased in population?</li>
+		<li>When did most counties in Western Kansas begin shrinking in population?</li>
+		<li>How has the construction of the Interstate affected the population of Western Kansas?</li>
+	</ul>
+	<h3 style="border-bottom:1px solid gray;">Methodology:</h3>
+	<p>&emsp;In this project, I will be using the R computer language to manipulate the data that I am working with. The data I am using in this project was given to me as part of my assignments in GEOG 602 at Kansas State University. <a href="KansasCensus.csv" download>The data can be downloaded by clicking this link.</a> I will also have to explain what I mean by Western Kansas before we get too far ahead into this assignment. In other words, I have to show what the study region of this project is. Here's a quick and dirty map I whipped up in ArcGIS.</p> 
+	<center><img src="studyregion.png" class="responsive"></center>
+	<p>&emsp;I split up the study region into six smaller subregions of nine counties. This will come in handy when I am trying to plot everything onto a small multiples chart. There will be one for each region. The major communities of this part of Kansas include Hutchinson, Hays, Dodge City, Garden City, Colby, Pratt, Great Bend, Liberal, and Goodland. Just from looking at the map, the study region takes up over half of Kansas in area, but is smaller in population than the eastern part of the state. The only interstate that runs through this region is Interstate 70. All but one major highway in this part of the country is part of the US Numbered Highway System or the state highways belonging to the Kansas Department of Transportation. Some of the more prominent highways in this region besides I-70 include US-24, US-36, US-40 (most of which has been incorporated into I-70), US-50, US-54, US-56, US-83, US-183, US-283, and US-281. Here's a list that will help clear up what types of roads are present in each county in our study region: </p>
+	<ul>
+		<li>Interstate 70 passes through the following counties: <u>Sherman, Thomas, Logan, Gove, Trego, Ellis, Russell, Lincoln, and Ellsworth.</u> These counties also have State Highways, US Highways, and County Roads.</li><br>
+		<li>Interstate 70 was constructed in pieces until it was completed in the state of Kansas in 1970.</li><br>
+		<li>No US Highways or Interstates pass through the following counties: <u>Greeley, Wichita, and Lane.</u></li><br>
+		<li>The US Highway System was completed in 1926.</li><br>
+		<li>Every other county in the study region either has a US Highway, State Highway, or County Road for transportation</li><br>
+	</ul>
+	<h3 style="border-bottom:1px solid gray;">Cleaning Up the Data</h3>
+	<p>&emsp;We will be studying census data from 1890 on a decennial basis up until 2010. One important caveat: in 1890, there was a county that doesn't exist anymore today. Garfield County, Kansas was once its own separate county, but would merge with Finney County by the 1900 Census. On the map drawn above, Garfield County was the little orange part sticking out sandwiched between Gray and Lane Counties. Because of this, I am going to add the population of Garfield County in 1890 to the population of Finney County. This would make the population of Finney County in 4,231 in the year 1890. Here's the code that will get me started on this assignment. NOTE: If you want to copy my code and try it out yourself, remember to click <b>Paste commands only</b> when pasting my code in to R for you to use.</p>
+	<p class="code">
+		&#62; data &#60;- read.csv(file="KansasCensus.csv", header=TRUE, sep=",")<br>
+		&#62; data2 &#60;- data[-c(31),]<br>
+		&#62; data2[28,"Y1890"] &#60;- 4231<br>
+	</p>
+	<p>&emsp;Now that this is all taken care of, it's time to get to work on cleaning up the data for usage in this assignment. We want to filter out any of the unnecessary columns and rows for this. There are 54 counties in the area we are studying, and we have to eliminate data from the counties that are not present in this study region. It's going to be pretty repetitive in terms of coding, but it is necessary. Here's the code we use for cleaning up the data:</p>
+	<p class="code">
+		&#62; countypop &#60;- data2[c(5:18)]<br>
+		&#62; regionone &#60;- countypop[which(countypop$CO_ABBR=="CN" | countypop$CO_ABBR=="GL" | countypop$CO_ABBR=="LG" | countypop$CO_ABBR=="RA" | countypop$CO_ABBR=="SC" | countypop$CO_ABBR=="SH" | countypop$CO_ABBR=="TH" | countypop$CO_ABBR=="WA" | countypop$CO_ABBR=="WH"), ]<br>
+		&#62; regiontwo &#60;- countypop[which(countypop$CO_ABBR=="HM" | countypop$CO_ABBR=="KE" | countypop$CO_ABBR=="FI" | countypop$CO_ABBR=="ST" | countypop$CO_ABBR=="GT" | countypop$CO_ABBR=="HS" | countypop$CO_ABBR=="MT" | countypop$CO_ABBR=="SV" | countypop$CO_ABBR=="SW"), ]<br>
+		&#62; regionthree &#60;- countypop[which(countypop$CO_ABBR=="CA" | countypop$CO_ABBR=="FO" | countypop$CO_ABBR=="GY" | countypop$CO_ABBR=="HG" | countypop$CO_ABBR=="LE" | countypop$CO_ABBR=="NS" | countypop$CO_ABBR=="PN" | countypop$CO_ABBR=="ME" | countypop$CO_ABBR=="RH"), ]<br>
+		&#62; regionfour &#60;- countypop[which(countypop$CO_ABBR=="CM" | countypop$CO_ABBR=="BA" | countypop$CO_ABBR=="ED" | countypop$CO_ABBR=="HP" | countypop$CO_ABBR=="KM" | countypop$CO_ABBR=="KW" | countypop$CO_ABBR=="PR" | countypop$CO_ABBR=="RN" | countypop$CO_ABBR=="SF"), ]<br>
+		&#62; regionfive &#60;- countypop[which(countypop$CO_ABBR=="BT" | countypop$CO_ABBR=="EW" | countypop$CO_ABBR=="JW" | countypop$CO_ABBR=="LC" | countypop$CO_ABBR=="MC" | countypop$CO_ABBR=="OB" | countypop$CO_ABBR=="RC" | countypop$CO_ABBR=="RS" | countypop$CO_ABBR=="SM"), ]<br>
+		&#62; regionsix &#60;- countypop[which(countypop$CO_ABBR=="DC" | countypop$CO_ABBR=="EL" | countypop$CO_ABBR=="GO" | countypop$CO_ABBR=="GH" | countypop$CO_ABBR=="NT" | countypop$CO_ABBR=="PL" | countypop$CO_ABBR=="RO" | countypop$CO_ABBR=="SD" | countypop$CO_ABBR=="TR"), ]<br>
+	</p>
+	<p>&emsp;We're almost there. The data is cleaned up for the most part. But it just needs the finishing touches. Each dataframe we created for each region will be transposed so we can actually make the graphs that we want. The finishing touches is to just change the names of the abbreviations to their full names, as well as the rows to census years, to prevent confusion when you are looking at my chart. Here's the code for that:</p>
+	<p class="code">
+		&#62; regionI &#60;- t(regionone[,2:14])<br>
+		&#62; colnames(regionI) &#60;- c("Cheyenne", "Greeley", "Logan", "Rawlins", "Scott", "Sherman", "Thomas", "Wallace", "Wichita")<br>
+		&#62; region1 &#60;- as.data.frame(regionI)<br>
+		&#62; regionII &#60;- t(regiontwo[,2:14])<br>
+		&#62; colnames(regionII) &#60;- c("Hamilton", "Kearney", "Finney", "Stanton", "Grant", "Haskell", "Morton", "Stevens", "Seward")<br>
+		&#62; region2 &#60;- as.data.frame(regionII)<br>
+		&#62; regionIII &#60;- t(regionthree[,2:14])<br>
+		&#62; colnames(regionIII) &#60;- c("Clark", "Ford", "Gray", "Hodgeman", "Lane", "Ness", "Pawnee", "Meade", "Rush")<br>
+		&#62; region3 &#60;- as.data.frame(regionIII)<br>
+		&#62; regionIV &#60;- t(regionfour[,2:14])<br>
+		&#62; colnames(regionIV) &#60;- c("Comanche", "Barber", "Edwards", "Harper", "Kingman", "Kiowa", "Pratt", "Reno", "Stafford")<br>
+		&#62; region4 &#60;- as.data.frame(regionIV)<br>
+		&#62; regionV &#60;- t(regionfive[,2:14])<br>
+		&#62; colnames(regionV) &#60;- c("Barton", "Ellsworth", "Jewell", "Lincoln", "Mitchell", "Osborne", "Rice", "Russell", "Smith")<br>
+		&#62; region5 &#60;- as.data.frame(regionV)<br>
+		&#62; regionVI &#60;- t(regionsix[,2:14])<br>
+		&#62; colnames(regionVI) &#60;- c("Decatur", "Ellis", "Gove", "Graham", "Norton", "Phillips", "Rooks", "Sheridan", "Trego")<br>
+		&#62; region6 &#60;- as.data.frame(regionVI)<br>
+		&#62; rownames(region1) &#60;- c("1890", "1900", "1910", "1920", "1930", "1940", "1950", "1960", "1970", "1980", "1990", "2000", "2010")<br>
+		&#62; rownames(region2) &#60;- c("1890", "1900", "1910", "1920", "1930", "1940", "1950", "1960", "1970", "1980", "1990", "2000", "2010")<br>
+		&#62; rownames(region3) &#60;- c("1890", "1900", "1910", "1920", "1930", "1940", "1950", "1960", "1970", "1980", "1990", "2000", "2010")<br>
+		&#62; rownames(region4) &#60;- c("1890", "1900", "1910", "1920", "1930", "1940", "1950", "1960", "1970", "1980", "1990", "2000", "2010")<br>
+		&#62; rownames(region5) &#60;- c("1890", "1900", "1910", "1920", "1930", "1940", "1950", "1960", "1970", "1980", "1990", "2000", "2010")<br>
+		&#62; rownames(region6) &#60;- c("1890", "1900", "1910", "1920", "1930", "1940", "1950", "1960", "1970", "1980", "1990", "2000", "2010")<br>
+
+	</p>
+	<h3 style="border-bottom:1px solid gray;">Creating Graphs:</h3>
+	<p>&emsp;What we're going to do for this project is to create what's called a small multiple graph, where you can have many graphs packed into one image. Each region has nine counties to them, so we're going to be creating six small multiple charts with nine charts inside each of them. But we need the ggplot2 package in order to do this. If you don't have it already, simply type <code>install.packages("ggplot2")</code> onto your console. Also remember to pick a CRAN mirror closest to you if you are asked to do it.</p>
+</div>
+</body>
+</html>

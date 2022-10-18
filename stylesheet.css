@@ -59,6 +59,10 @@ figure{
 	padding: 5px;
 }
 
+figcaption{
+	font-size: 10px;
+}
+
 li{
 	list-style-image: url("bulletpoint.png");
 }
@@ -75,6 +79,10 @@ li{
 
 .bibliography li{
 	list-style-image: url("bookbullet.png");
+}
+
+.questions li{
+	list-style-image: url("questionmark.png");
 }
 
 .code{

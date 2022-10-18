@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="stylesheet.css">
+<title>Word Cloud</title>
+</head>
+
+<body>
+<div id="content">
+	<h3 style="border-bottom:1px solid gray;">Word Cloud</h3>
+	<p>&emsp;In this assignment, we will be using R to create a word cloud of a speech of our choice. If one is to do this on their own, they must install the following packages for R on their computer: <code>tm</code>, <code>SnowballC</code>, <code>wordcloud</code>, and <code>RColorBrewer</code>. I was provided a script in R that I could use for this assignment by my professor. I will be using it to create a word cloud for Jesus's Sermon on the Mount, delivered in 33 AD. In this speech, Jesus lays out his moral teachings to the audience on a hill near the Sea of Galilee in northern Israel. The full text of this speech can be found in any Bible in Matthew 5, 6, and 7. I transcribed this speech from the King James Bible to a .txt file to be analyzed in R, and have a world cloud created from it. <a href="Sermon on the Mount.txt">Click here to view this file.</a> Below will be the code I used to create this word cloud.</p>
+	
+	<p>&emsp;<b>NOTE:</b> In the fifth line of the code, the filename of the txt file may be different, depending on what you choose to call it. You just need to have a txt file present in the directory you hooked up R to, and you need to call it by its name, whatever it is.</p>
+	<p class="code">
+		&#62; library("tm")<br>
+		&#62; library("SnowballC")<br>
+		&#62; library("wordcloud")<br>
+		&#62; library("RColorBrewer")<br>
+		&#62; filePath &#60;- "Sermon on the Mount.txt"<br>
+		&#62; text &#60;- readLines(filePath)<br>
+		&#62; docs &#60;- Corpus(VectorSource(text))<br>
+		&#62; docs &#60;- tm_map(docs, stripWhitespace)<br>
+		&#62; docs &#60;- tm_map(docs, removeNumbers)<br>
+		&#62; docs &#60;- tm_map(docs, removePunctuation)<br>
+		&#62; docs &#60;- tm_map(docs, content_transformer(tolower))<br>
+		&#62; docs &#60;- tm_map(docs, removeWords, stopwords("english"))<br>
+		&#62; docs &#60;- tm_map(docs, removeWords, c("word1", "word2"))<br>
+		&#62; dtm &#60;- TermDocumentMatrix(docs)<br>
+		&#62; m &#60;- as.matrix(dtm)<br>
+		&#62; v &#60;- sort(rowSums(m), decreasing=TRUE)<br>
+		&#62; d &#60;- data.frame(word = names(v), freq = v)<br>
+		&#62; set.seed(1234)<br>
+		&#62; wordcloud(words = d$word, freq = d$freq, min.freq = 2, max.words = 200, random.order = FALSE, rot.per = 0.35, colors = brewer.pal(8, "Dark2"))
+	</p>
+	<p>&emsp;Here is the word cloud we get:</p>
+	<figure align="center">
+		<a href="wordcloud.png" target="_blank"><img src="wordcloud.png"></a>
+		<figcaption>The resulting word cloud. This word cloud is based on the text in Jesus's Sermon on the Mount, and is a representation of how many times Jesus uses each word, and how many words he used in his speech. The larger the word is, the more often he uses it.</figcaption>
+	</figure>
+	<p>&emsp;As you would expect from a work of text transcribed from the 16th century, archiac language constitutes of the most frequently used words in the speech. Words like "thee", "thou", "thy", "shall", etc. But Jesus also frequently uses terms like "father", "blessed", and "kingdom" as you would expect out of a religous text. Regardless, the word Jesus used most in his Sermon on the Mount is "shall".</p>
+</div>
+</body>
+</html>

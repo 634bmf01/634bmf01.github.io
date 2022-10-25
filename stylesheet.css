@@ -67,6 +67,13 @@ li{
 	list-style-image: url("bulletpoint.png");
 }
 
+table, th, td{
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 10px;
+  font-family: "LucidaGrande";
+}
+
 .animatemap{
 	background-color:#F8F0E3;
 	box-shadow: 2px 2px 4px #000000;

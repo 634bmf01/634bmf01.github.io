@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="stylesheet.css">
+<title>ggplot2 Graph Gallery</title>
+</head>
+
+<body>
+<div id="content">
+	<h3 style="border-bottom:1px solid gray;">Intro: </h3>
+	<p>&emsp;In this assignment, I want to play around a bit with ggplot2. You may have seen that in some of my class exercises, I worked on creating a graph with the base R package. But we can do better than this. ggplot offers so much more on how to create graphs of more quality, and even more features and customizability. I don't need to download many datasets for this assignment, because R already has many of them preloaded into the software and language I downloaded when I first got R. All I need to do is call them with the <code>data()</code> command. Let's get started with some of the more basic graphs. <br><br><b>&emsp;IMPORTANT:</b> Above all, remember to load ggplot2 if you want to do this exercise too and mess with the code yourself. Remember to type <code>library(ggplot2)</code> before you get graphing!</p>
+	<h3 style="border-bottom:1px solid gray;">Scatterplots and Lines: </h3>
+	<p>&emsp;First, we'll do a scatterplot. The dataset we'll be using is called <code>mtcars</code>, which contains data taken from an issue of the Motor Trend US magazine from 1974. Contained in this dataset is information about 30 different cars from model years 1973 and 1974, such as horsepower, gas mileage, weight, engine displacement, etc. You don't need to load any packages to access this dataset, since it is preloaded with R. For this graph, I could just ask ggplot to plot the datapoints. But I want to add a little bit more information to my graph. For instance, I want the viewer to be able to identify each data point as one of the cars in this dataset. I also want them to be able to tell how many cylinders are in each car's engine to convey even more information about fuel economy from each car. If I want to add labels to my datapoints, I have to download the package <code>ggrepel</code>. </p>
+	<a href="ggplotscatterplot.png" target="_blank">
+		<img src="ggplotscatterplot.png" class="graph" hspace="5" align="right">
+	</a>
+	<p class="code">
+		&#62; library(ggrepel)<br>
+		&#62; data(mtcars)<br>
+		&#62; ggplot(mtcars, aes(x=hp, y=mpg)) + labs(x="Horsepower (hp)", y="Gas Mileage (mpg)", title="Horsepower vs Gas Mileage") + geom_point(aes(shape=cyl, color=cyl), size=3) + geom_smooth(method=lm, se=FALSE, col="#A9A9A9", linetype = "dashed") + theme(plot.title = element_text(hjust = 0.5, face = "bold")) + geom_text_repel(aes(label = rownames(mtcars)))
+	</p>
+	<p>&emsp;If you look at the graph, you'll see that I also drew a trendline for reference. This graph shows that cars with more horsepower will get lower gas mileage. It also shows that cars with more cylinders in their engine will also get lower gas mileage, as they will also have a higher horsepower. Next, I'll work on a line graph. For this chart, I will be using the dataset <code>co2</code>, which contains measurement of carbon dioxide in the air taken from an observatory at the top of Mauna Loa, Hawaii every year from 1959 to 2021. If you've been paying attention to the climate crisis, you'll probably know what I'm talking about. <a href="https://gml.noaa.gov/ccgg/trends/data.html">Click on this link to download the data that I used for this graph.</a> Here's the code to create that chart in ggplot:</p> 
+	<a href="ggplotline.png" target="_blank">
+		<img src="ggplotline.png" class="graph" hspace="5" align="right">
+	</a>
+	<p class="code">
+		&#62; CO2 &#60;- read.csv(file="co2_annmean_mlo.csv", header=TRUE, sep=",")<br>
+		&#62; ggplot(CO2, aes(x=year, y=mean)) + labs(x="Year", y="Concentration CO2 (ppm)", title="CO2 Concentration 1959-2021") + geom_line(size=2) + theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+	</p>
+	<p>&emsp;As this line chart shows, to our dismay, the concentration of CO2 in the atmosphere has been almost constantly increasing since 1959. Continuing to burn fossil fuels, and even open up more manufacturing plants, expand cities, and build new cars with a combustion engine is the cause of this. And when this happens, the world will continue to get warmer and warmer.</p>
+</div>
+</body>
+</html>

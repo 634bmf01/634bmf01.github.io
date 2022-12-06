@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="stylesheet.css">
+<title>Word Cloud 2</title>
+</head>
+<body>
+<div id="content">
+	<h3 style="border-bottom:1px solid gray;">Word Cloud 2:</h3>
+	<p>&emsp; Now I want to create another word cloud, but this time using a different document. <a href="GeographySince2000.txt">This document contains the titles of every thesis written in the Kansas State University's Department of Geography since 2000.</a> I want to create a word cloud to find out which words are used the most in creating a title for a thesis statement. I will use very similar code as before, but with a different choice of stopwords removed. Observe below: </p>
+	<p class="code">
+		&#62; library("tm")<br>
+		&#62; library("SnowballC")<br>
+		&#62; library("wordcloud")<br>
+		&#62; library("RColorBrewer")<br>
+		&#62; filePath &#60;- "GeographySince2000.txt"<br>
+		&#62; text &#60;- readLines(filePath)<br>
+		&#62; docs &#60;- Corpus(VectorSource(text))<br>
+		&#62; docs &#60;- tm_map(docs, stripWhitespace)<br>
+		&#62; docs &#60;- tm_map(docs, removeNumbers)<br>
+		&#62; docs &#60;- tm_map(docs, removePunctuation)<br>
+		&#62; docs &#60;- tm_map(docs, content_transformer(tolower))<br>
+		&#62; docs &#60;- tm_map(docs, removeWords, stopwords("english"))<br>
+		&#62; docs &#60;- tm_map(docs, removeWords, c("kansas","missouri","american","nebraska","america","colorado","india","flint","eastern","northern","southern","western","northeast","teton","hantavirus","among","north","south","east","west","central","using","along","great","united","states"))<br>
+		&#62; dtm &#60;- TermDocumentMatrix(docs)<br>
+		&#62; m &#60;- as.matrix(dtm)<br>
+		&#62; v &#60;- sort(rowSums(m), decreasing=TRUE)<br>
+		&#62; d &#60;- data.frame(word = names(v), freq = v)<br>
+		&#62; set.seed(1234)<br>
+		&#62; wordcloud(words = d$word, freq = d$freq, min.freq = 3, max.words = 200, random.order = FALSE, rot.per = 0.35, colors = brewer.pal(8, "Dark2"))
+	</p>
+	<figure align="center">
+		<a href="wordcloud2.png" target="_blank"><img src="wordcloud2.png" class="responsive"></a>
+		<figcaption>The resulting word cloud. This word cloud is based on a text document containing the titles of every thesis produced by students at Kansas State University's Geography Department since 2000.</figcaption>
+	</figure>
+	<p>&emsp; Based on this word cloud, the term "change" is used the most. One of the hallmark features of science and math is its ability to observe change. This is probably why the term "change" is used the most among all words in this cloud.</p>
+</div>
+</body>
+</html>

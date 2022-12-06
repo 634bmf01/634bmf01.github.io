@@ -38,30 +38,6 @@
 		<figcaption>The resulting word cloud. This word cloud is based on the text in Jesus's Sermon on the Mount, and is a representation of how many times Jesus uses each word, and how many words he used in his speech. The larger the word is, the more often he uses it.</figcaption>
 	</figure>
 	<p>&emsp;As you would expect from a work of text transcribed from the 16th century, there is lots of archaic language. Words like thee, thou, thine, etc. I could not find a script to remove them, so I had to do them manually to eliminate any and all stop words in order to make this word cloud as informative as possible. The words that Jesus uses the most are "heaven" and "father". This makes sense in a religious text, since the term "father" refers to God, and God is in Heaven.</p>
-	<h3 style="border-bottom:1px solid gray;">Word Cloud 2:</h3>
-	<p>&emsp; Now I want to create another word cloud, but this time using a different document. <a href="GeographySince2000.txt">This document contains the titles of every thesis written in the Kansas State University's Department of Geography since 2000.</a> I want to create a word cloud to find out which words are used the most in creating a title for a thesis statement. I will use very similar code as before, but with a different choice of stopwords removed. Observe below: </p>
-	<p class="code">
-		&#62; filePath &#60;- "GeographySince2000.txt"<br>
-		&#62; text &#60;- readLines(filePath)<br>
-		&#62; docs &#60;- Corpus(VectorSource(text))<br>
-		&#62; docs &#60;- tm_map(docs, stripWhitespace)<br>
-		&#62; docs &#60;- tm_map(docs, removeNumbers)<br>
-		&#62; docs &#60;- tm_map(docs, removePunctuation)<br>
-		&#62; docs &#60;- tm_map(docs, content_transformer(tolower))<br>
-		&#62; docs &#60;- tm_map(docs, removeWords, stopwords("english"))<br>
-		&#62; docs &#60;- tm_map(docs, removeWords, c(docs, removeWords, c("gis","two","united","states","usa","sensed","riley","along","may","use","upper","small","years","counties","images","grand","investigating","developing","era","attachment","classification","relative","remotely","improved"))<br>
-		&#62; dtm &#60;- TermDocumentMatrix(docs)<br>
-		&#62; m &#60;- as.matrix(dtm)<br>
-		&#62; v &#60;- sort(rowSums(m), decreasing=TRUE)<br>
-		&#62; d &#60;- data.frame(word = names(v), freq = v)<br>
-		&#62; set.seed(1234)<br>
-		&#62; wordcloud(words = d$word, freq = d$freq, min.freq = 2, max.words = 200, random.order = FALSE, rot.per = 0.35, colors = brewer.pal(8, "Dark2"))
-	</p>
-	<figure align="center">
-		<a href="wordcloud2.png" target="_blank"><img src="wordcloud2.png" class="responsive"></a>
-		<figcaption>The resulting word cloud. This word cloud is based on a text document containing the titles of every thesis produced by students at Kansas State University's Geography Department since 2000.</figcaption>
-	</figure>
-	<p>&emsp; Based on this word cloud, the term "Kansas" is used the most. This makes sense as Kansas State Universtiy is located within the state, and it's easiest for geography students attending there to simply write a thesis about what is the most immediately present to them.</p>
 </div>
 </body>
 </html>
